@@ -84,6 +84,9 @@ def book_data():
     book_data = pd.DataFrame(list(zip(titles, prices)), columns=['Titles','Prices'])    
     print(book_data)        # Print to the terminal as confirmation - only we can see this
 
+    book_data['Sale Prices'] = book_data['Prices'] - (book_data['Prices'] * 0.25)
+    book_data['Sale Prices'] = book_data['Sale Prices'].round(2)
+
     # Format and print the DataFrame using the html template provided in the templates subdirectory
     return render_template('template.html',  tables=[book_data.to_html(classes='data')], titles=book_data.columns.values)
 
@@ -91,5 +94,5 @@ def book_data():
 @app.route("/learn")
 def learn():
     # Return a string the describes one thing you learned in ENSF 692.
-    pass
+    return "I learned a lot about manipulating data frames and arrays. I used to be able to do this but now I have a better understanding of how it works in the background."
 
